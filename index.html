@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YLR'27 - Youth League For Ruto</title>
+    <!-- Montserrat Font for bold, geometric urban signage aesthetics -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --uda-green: #0b6623;
+            --uda-yellow: #ffcc00;
+            --dark-bg: #111111;
+            --light-bg: #f4f6f4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(135deg, var(--uda-green) 60%, #053b14 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: var(--uda-yellow);
+        }
+
+        .logo-placeholder {
+            font-weight: 900;
+            font-size: 2.5rem;
+            color: var(--uda-yellow);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #e0e0e0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .counter-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .counter-number {
+            color: var(--uda-yellow);
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Twin Pillars Section */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--uda-green);
+        }
+
+        .card.grassroots {
+            border-left: 5px solid var(--uda-yellow);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #111;
+            text-transform: uppercase;
+        }
+
+        /* Deliverables Tracker Component */
+        .tracker-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+
+        .tracker-section h2 {
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .tracker-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            background: #eee;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--uda-green);
+            color: white;
+        }
+
+        .deliverables-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .deliverable-item {
+            background: #fafafa;
+            border: 1px solid #eef0ee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+
+        .badge.jobs { background: #e3f2fd; color: #0d47a1; }
+        .badge.education { background: #e8f5e9; color: #1b5e20; }
+        .badge.tech { background: #fff8e1; color: #ff6f00; }
+
+        .deliverable-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+
+        .deliverable-item p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--uda-green);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--uda-green);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background-color: #053b14;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #111;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 3rem 1rem; }
+            .logo-placeholder { font-size: 2rem; }
+            header h1 { font-size: 1.2rem; }
+            .slogan { font-size: 0.95rem; padding: 0.5rem 1rem; }
+            .form-container, .tracker-section { padding: 2rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-placeholder">YLR '27</div>
+        <h1>Youth League For Ruto</h1>
+        <div>
+            <span class="slogan">One Generation, One Destiny, One Leader</span>
+        </div>
+        <div class="counter-box">
+            <span>🟢 Registered On Ground:</span>
+            <span class="counter-number" id="voterCounter">12,450</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- The Twin Pillars -->
+        <section class="pillars-grid">
+            <div class="card">
+                <h3>🎓 The Campus Wing</h3>
+                <p>Mobilizing university, college, and TVET comrades. Bringing academic intellect, policy debates, and institutional leadership pipelines straight to the campaign strategy.</p>
+            </div>
+            <div class="card grassroots">
+                <h3>🛠️ The Community Wing</h3>
+                <p>Empowering the real grassroots forces. Uniting small business owners, Jua Kali artisans, and transport sector operators under one solid economic banner.</p>
+            </div>
+        </section>
+
+        <!-- Interactive Deliverables Tracker Section -->
+        <section class="tracker-section">
+            <h2>The Ground Deliverables Tracker</h2>
+            <p class="tracker-subtitle">Factual milestones and investments targeted at empowering the youth demography across Kenya.</p>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterDeliverables('all')">Show All</button>
+                <button class="filter-btn" onclick="filterDeliverables('jobs')">Kazi & Enterprise</button>
+                <button class="filter-btn" onclick="filterDeliverables('education')">Elimu (Higher Ed)</button>
+                <button class="filter-btn" onclick="filterDeliverables('tech')">Digital & Tech</button>
+            </div>
+
+            <div class="deliverables-container" id="deliverablesContainer">
+                <!-- Item 1 -->
+                <div class="deliverable-item" data-category="jobs">
+                    <span class="badge jobs">Kazi & Enterprise</span>
+                    <h4>NYOTA Program Rollout</h4>
+
